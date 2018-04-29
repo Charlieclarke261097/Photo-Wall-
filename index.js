@@ -68,26 +68,6 @@ function onAddPhoto(imageURI) {
 alert("AddPhoto");    
 
     
-<<<<<<< HEAD
-=======
-function gotFileEntry(fileEntry){
-    alert("gotFileEntry " + fileEntry);
-    fileEntry.file(gotFile,fail);
-}
-    
-function gotFile(fileObject){
-    alert("gotFile " + fileObject);
-	
-	
-Backendless.Files.upload(file, "Images", true)
- .then( function( fileURL) {
-  })
- .catch( function( error ) {
-  });
-	
- alert("File Uploadaed " + fileObject);
->>>>>>> parent of f88ff89... 1
-}
 
 
 
@@ -104,5 +84,13 @@ var infromation = [
 
 //save array to backendless
  Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+
+
+}
+
+
+ 
+ 
+
 
     
