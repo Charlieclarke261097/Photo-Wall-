@@ -20,7 +20,8 @@
     
 <!-- Backendlesss script tags -->
 <script src="backendless.js" type="text/javascript"></script>
-    
+	
+<!-- Javascript file script tag-->
 <script src="index.js"></script>
     
 
@@ -29,12 +30,13 @@
 </head>
 
 <body>
-
+	<!-- haeader div with graphic-->
     <div data-role = "page" id="page1" data-theme = "d">
     <div id="header" data-role = "header">
         <img id= "title" src="Graphic.png" alt="Title">
     </div>
         
+	<!-- homescreen div with buttons to navigate app -->	
     <div data-role = "main" class = "ui-content.">
     <a class="ui-btn ui-alt-icon  ui-icon-camera ui-btn-icon-bottom  ui-corner-all" onclick="capturePhoto();"> </a>
     <label id="addlabel">Add to wall </label>
@@ -43,17 +45,19 @@
         
     
     </div>
-    
+		
+    <!-- footer div with developer info and copyright -->
     <div id = "footer" data-role = "footer">
     <h2> &copy; Charlie Clarke 2018</h2>
     </div>
     
     </div>
-    
+	
+    <!-- wall  div with image content and back button to go back to homescreen -->
     <div data-role = "page" id="page2" data-theme = "d">
     <button class ="ui-btn ui-icon-back ui-btn-icon-bottom  ui-corner-all" onclick="window.location.href='#page1'" id="backButton"></button>
     <div data-role = "content" id="images">
-    <img style="display: block; width= 50px; length = 50px;" id= "myImage" src="" />
+    <img width= "50px" height = "50px" id= "myImage" src="" />
     </div>
     </div>
     

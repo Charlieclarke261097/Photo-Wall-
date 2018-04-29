@@ -28,8 +28,10 @@ function onPhotoDataSuccess(imageURI) {
 	var image = document.getElementById('myImage');
 	image.style.display = 'block';
 	image.src = imageURI ;
-   
+   localStorage.setItem("imageURI"+imageURI)
     onAddPhoto(imageURI);
+	
+	var textEntry = prompt("Message");
 }
 
 function onFail(message) {
@@ -40,64 +42,48 @@ function onFail(message) {
 
 
     
+Backendless.Data.of("Information").find().then(processResults).catch(error);
+function processResults(Information) {
 
+$("#images").empty();
 
-
-function processResults(Images){
-//add each Task
+//add each photo and text 
     
-for(var i = 0; i < Images.length;i++){
-    $("#images").append("a href=")
+for(var i = 0; i < Information.length;i++){
+    $("#images").append("a href=" + Information[i].fileLocation)
 }
-    
+	
+ 
 //refresh the table
 $("#myImage").content('refresh');
-}
+
  function error(err){
      console.log("error1 " + err); 
  }
 
-
+}
 
 //Add photo to backendless table
 function onAddPhoto(imageURI) {
 alert("AddPhoto");    
-window.resolveLocalFileSystemURL(imageURI,gotFileEntry,fail);
+
     
 }
 
-function gotFS(fileSystem){
-    alert("gotFS " + fileSystem);
-    var fileName = imageURI.split('/').pop();
-    fileSystem.getFile(fileName,{create: false,exclusive: false}, gotFileEntry,fail)
-    
-}
-    
-function gotFileEntry(fileEntry){
-    alert("gotFileEntry " + fileEntry);
-    fileEntry.file(gotFile,fail);
-}
-    
-function gotFile(fileObject){
-    alert("gotFile " + fileObject);
-	
-	
-Backendless.Files.upload(fileObject, "Images", true)
- .then( function( fileURL) {
-  })
- .catch( function( error ) {
-  });
-	
- alert("File Uploadaed " + fileObject);
-}
-
-function fail(error){
-    alert("cannot find file" + error.message);
-}
 
 
  
- 
- 
+ //Array of variables
+
+var infromation = [
+	fileLocation : imageURI;
+	Text : textEntry;
+	
+];
+
+
+
+//save array to backendless
+ Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
 
     
