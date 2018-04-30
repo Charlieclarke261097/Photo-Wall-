@@ -58,7 +58,7 @@ for(var i = 0; i < Information.length;i++){
 	
  
 //refresh the table
-$("#images").content('refresh');
+//$("#images").content('refresh');
 	
 	
 
