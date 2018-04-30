@@ -40,7 +40,6 @@ function onFail(message) {
 
 
 
-
     
 Backendless.Data.of("Information").find().then(processResults).catch(error);
 function processResults(Information) {
@@ -56,6 +55,12 @@ for(var i = 0; i < Information.length;i++){
  
 //refresh the table
 $("#myImage").content('refresh');
+	
+	
+function error(err){
+     alert(err); 
+ }
+
 
  function error(err){
      console.log("error1 " + err); 
@@ -74,11 +79,11 @@ alert("AddPhoto");
  
  //Array of variables
 
-var infromation = [
-	fileLocation : imageURI;
-	Text : textEntry;
+var infromation = {
+	fileLocation : imageURI,
+	Text : textEntry
 	
-];
+};
 
 
 
