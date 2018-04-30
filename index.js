@@ -38,7 +38,9 @@ function onFail(message) {
       alert('Failed because: ' + message);
 }
 
-
+function error(err){
+     alert(err); 
+ }
 
     
 Backendless.Data.of("Information").find().then(processResults).catch(error);
@@ -49,7 +51,8 @@ $("#images").empty();
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
-    $("#images").append("a href=" + Information[i].fileLocation)
+	var message = Information[i].Text;
+    $("#images").append("a href=" + Information[i].fileLocation + message)
 }
 	
  
@@ -57,14 +60,9 @@ for(var i = 0; i < Information.length;i++){
 $("#myImage").content('refresh');
 	
 	
-function error(err){
-     alert(err); 
- }
 
 
- function error(err){
-     console.log("error1 " + err); 
- }
+
 
 }
 
@@ -73,14 +71,14 @@ function onAddPhoto(imageURI) {
 alert("AddPhoto");    
 
     
+var imageData = imageURI;
 
-
-
+var textEnter = textEntry;
  
  //Array of variables
 
 var infromation = {
-	fileLocation : imageURI,
+	fileLocation : imageData,
 	Text : textEntry
 	
 };
