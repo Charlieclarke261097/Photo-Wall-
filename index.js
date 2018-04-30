@@ -89,9 +89,9 @@ var infromation = {
 
 //save array to backendless
  Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
-
-
 }
+
+
 
 
  
