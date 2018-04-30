@@ -45,19 +45,20 @@ function error(err){
     
 Backendless.Data.of("Information").find().then(processResults).catch(error);
 function processResults(Information) {
-
+	
+//Empty the content 
 $("#images").empty();
 
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
 	var message = Information[i].Text;
-    $("#images").append("a href=" + Information[i].fileLocation + message)
+    $("#images").append("a href=" + Information[i].fileLocation + message);
 }
 	
  
 //refresh the table
-$("#myImage").content('refresh');
+$("#images").content('refresh');
 	
 	
 
