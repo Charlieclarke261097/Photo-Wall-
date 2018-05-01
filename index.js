@@ -33,7 +33,7 @@ function onPhotoDataSuccess(imageURI) {
 	image.src = imageURI ;
    localStorage.setItem("imageURI",imageURI);
     	
-	
+	alert("Photo saved" + imageURI);
 }
 
 
