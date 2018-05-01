@@ -77,7 +77,7 @@ alert( "new image has been saved" + savedImage);
   }
       )
  .catch( function( error ) {
-    console.log( "error - " + error.message );
+    alert( "error - " + error.message );
   }); 
         };
 
@@ -85,7 +85,7 @@ alert( "new image has been saved" + savedImage);
     
     
     
-    
+    alert("end fucntion");
 
 }
     
@@ -103,7 +103,7 @@ $("#images").empty();
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
-    $("#images").append("<img src=" + Information[i].fileURL+">");
+    $("#images").append("<img src=" + Information[i].fileLocation+">");
 }
 	
     
