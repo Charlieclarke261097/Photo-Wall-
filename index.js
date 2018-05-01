@@ -4,7 +4,10 @@ Backendless.initApp("3F4DF6B3-BD68-2097-FFF1-1E29A6C5EC00","89A5E954-BFC0-5152-F
 //Check that the page has loaded
 $(document).on("pageshow","#page2", onPageShow);
 function onPageShow() {
+    
+
 console.log("page shown");
+    
 }
 
 var destinationType; //used sets what should be returned (image date OR file path to image for example)
@@ -29,16 +32,32 @@ function onPhotoDataSuccess(imageURI) {
 	image.style.display = 'block';
 	image.src = imageURI ;
    localStorage.setItem("imageURI",imageURI);
-    onAddPhoto();
-	
+    	
 	
 }
 
 
-
-
 function onAddPhoto(imageURI) {
 alert("AddPhoto");  
+    
+var imageData = (localStorage.imageURI);
+
+
+ 
+ //Array of variables
+
+var infromation = {
+	fileLocation : imageData,
+	
+};
+    
+//save array to backendless
+ Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+	
+
+
+
+
     
  Backendless.Data.of("Information").find().then(processResults).catch(error);
 function processResults(Information) {
@@ -49,8 +68,7 @@ $("#images").empty();
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
-	var message = Information[i].Text;
-    $("#images").append("a href=" + Information[i].fileLocation);
+    $("#images").append("<img src=" + Information[i].fileLocation+">");
 }
 	
  
@@ -82,23 +100,10 @@ function error(err){
 //Add photo to backendless table
   
 
-    
-var imageData = (localStorage.imageURI);
-
-
- 
- //Array of variables
-
-var infromation = {
-	fileLocation : imageData,
-	Text : textEntry
-	
-};
 
 
 
-//save array to backendless
- Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+
     
 
 }
