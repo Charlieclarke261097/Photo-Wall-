@@ -41,15 +41,15 @@ function gotFileEntry(fileEntry){
 }
     
 function gotFile(fileObject){
-    console.log("gotFile " + fileObject);
+    alert("gotFile " + fileObject);
     
-       console.log("File Uploaded " + fileObject.fullPath);
+       alert("File Uploaded " + fileObject.fullPath);
     
-    console.log("File Uploaded " + fileObject.type);
+    alert("File Uploaded " + fileObject.type);
     
 	 console.log("File Uploaded " + fileObject.size);
 	
-    console.log("File Uploaded " + fileObject.name);
+    alert("File Uploaded " + fileObject.name);
     
 var d = Date.now(); // for now
 d.getHours(); // => 9
