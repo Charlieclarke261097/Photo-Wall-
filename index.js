@@ -21,6 +21,22 @@ function capturePhoto() {
 	destinationType: destinationType.FILE_URI });
 }
 
+function onPhotoDataSuccess(imageURI) {
+     alert("onPhoto" + imageURI);
+    
+    
+	var image = document.getElementById('myImage');
+	image.style.display = 'block';
+	image.src = imageURI ;
+   localStorage.setItem("imageURI",imageURI);
+    onAddPhoto();
+	
+	
+}
+
+
+
+
 function onAddPhoto(imageURI) {
 alert("AddPhoto");  
     
@@ -50,18 +66,7 @@ for(var i = 0; i < Information.length;i++){
     
     
     
-function onPhotoDataSuccess(imageURI) {
-     alert("onPhoto" + imageURI);
-    
-    
-	var image = document.getElementById('myImage');
-	image.style.display = 'block';
-	image.src = imageURI ;
-   localStorage.setItem("imageURI",imageURI)
-    onAddPhoto(imageURI);
-	
-	var textEntry = prompt("Message");
-}
+
 
 function onFail(message) {
       alert('Failed because: ' + message);
@@ -80,7 +85,7 @@ function error(err){
     
 var imageData = (localStorage.imageURI);
 
-var textEnter = textEntry;
+
  
  //Array of variables
 
