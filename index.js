@@ -50,7 +50,7 @@ $("#images").empty();
     
 for(var i = 0; i < Information.length;i++){
 	var message = Information[i].Text;
-    $("#images").append("a href=" + Information[i].fileLocation + message);
+    $("#images").append("a href=" + Information[i].fileLocation);
 }
 	
  
