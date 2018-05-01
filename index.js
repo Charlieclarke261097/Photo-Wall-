@@ -67,8 +67,8 @@ var d = Date.now();
             
             Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
  .then( function( savedFileURL ) {
-    alert( "file has been saved - " + JSON.stringify(savedFileURL));
-Backendless.Data.of("Information").save({fileLocation:savedFileURL}).then(saved).catch(error);
+    alert( "file has been saved - " + savedFileURL.fileURL);
+Backendless.Data.of("Information").save({fileLocation:savedFileURL.fileURL}).then(saved).catch(error);
     function saved(savedImage) {
 alert( "new image has been saved" + savedImage);  
 }
@@ -103,7 +103,7 @@ $("#images").empty();
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
-    $("#images").append("<img src=" + Information[i].fileLocation+">");
+    $("#images").append("<img src=" + Information[i].fileURL+">");
 }
 	
     
