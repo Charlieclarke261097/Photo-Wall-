@@ -52,7 +52,7 @@ function gotFile(fileObject){
     alert("File Uploaded " + fileObject.name);
     
 var d = Date.now();
-    
+    alert("date taken" + d);
     
     var filename = d+".jpeg";
     alert(filename);
