@@ -66,15 +66,27 @@ var d = Date.now();
             var byteArray = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
             
             Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
- .then( function( savedFileURL ) {
-    alert( "file has been saved - " + savedFileURL.fileURL);
-Backendless.Data.of("Information").save({fileLocation:savedFileURL.fileURL}).then(saved).catch(error);
-    function saved(savedImage) {
-alert( "new image has been saved" + savedImage);  
-}
+                .then( 
+                    function( savedFileURL ) {
+                        alert( "file has been saved - " + savedFileURL.fileURL);
+                        Backendless.Data.of("Information").save({fileLocation:savedFileURL.fileURL})
+                            .then(saved).catch(error);
+                                function saved(savedImage) {
+        
+                                    alert( "new image has been saved" + savedImage);  
+                                    
+                                    Backendless.Data.of( "Information" ).find()
+                                        .then( function( result ) {
+                                            processResults(result);
+                                        
+                                        })
+                                        .catch( function( error ) {
+                                        });
+        
+                                        }
             
                 
-  }
+                                        }
       )
  .catch( function( error ) {
     alert( "error - " + error.message );
@@ -86,7 +98,7 @@ alert( "new image has been saved" + savedImage);
     
     
     alert("end fucntion");
-processResults(Information);
+
 }
     
 
