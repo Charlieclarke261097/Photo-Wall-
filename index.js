@@ -13,6 +13,11 @@ document.addEventListener("deviceready",onDeviceReady,false);
 
 function onDeviceReady() {
 	destinationType=navigator.camera.DestinationType;
+    
+var d = new Date(); // for now
+d.getHours(); // => 9
+d.getMinutes(); // =>  30
+d.getSeconds(); // => 51
 }
 
 function capturePhoto() {
@@ -59,10 +64,10 @@ function gotFile(fileObject){
             
             var byteArray = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
             
-            Backendless.Files.saveFile( "testfolder", fileObject.name, byteArray, true )
+            Backendless.Files.saveFile( "testfolder", d, byteArray, true )
  .then( function( savedFileURL ) {
-    console.log( "file has been saved - " + savedFileURL );
-Backendless.Data.of("Information").save(savedFileURL).then(saved).catch(error);
+    alert( "file has been saved - " + savedFileURL );
+Backendless.Data.of("Information").save({fileLocation:savedFileURL}).then(saved).catch(error);
     function saved(savedImage) {
 console.log( "new image has been saved" + savedImage);  
 }
