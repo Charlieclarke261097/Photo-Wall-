@@ -20,28 +20,11 @@ function capturePhoto() {
 	navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
 	destinationType: destinationType.FILE_URI });
 }
-	
-function onPhotoDataSuccess(imageURI) {
-     alert("onPhoto" + imageURI);
+
+function onAddPhoto(imageURI) {
+alert("AddPhoto");  
     
-    
-	var image = document.getElementById('myImage');
-	image.style.display = 'block';
-	image.src = imageURI ;
-   localStorage.setItem("imageURI",imageURI)
-    onAddPhoto(imageURI);
-	
-	var textEntry = prompt("Message");
-}
-
-function onFail(message) {
-      alert('Failed because: ' + message);
-}
-
-
-
-    
-Backendless.Data.of("Information").find().then(processResults).catch(error);
+ Backendless.Data.of("Information").find().then(processResults).catch(error);
 function processResults(Information) {
 	
 //Empty the content 
@@ -62,11 +45,37 @@ for(var i = 0; i < Information.length;i++){
 
 
 
+}   
+    
+    
+    
+    
+function onPhotoDataSuccess(imageURI) {
+     alert("onPhoto" + imageURI);
+    
+    
+	var image = document.getElementById('myImage');
+	image.style.display = 'block';
+	image.src = imageURI ;
+   localStorage.setItem("imageURI",imageURI)
+    onAddPhoto(imageURI);
+	
+	var textEntry = prompt("Message");
 }
 
+function onFail(message) {
+      alert('Failed because: ' + message);
+}
+
+
+function error(err){
+     alert(err); 
+ }
+    
+
+
 //Add photo to backendless table
-function onAddPhoto(imageURI) {
-alert("AddPhoto");    
+  
 
     
 var imageData = (localStorage.imageURI);
@@ -86,9 +95,7 @@ var infromation = {
 //save array to backendless
  Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
     
-function error(err){
-     alert(err); 
- }
+
 }
 
 
