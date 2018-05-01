@@ -37,6 +37,10 @@ function onPhotoDataSuccess(imageURI) {
 }
 
 
+function onFail(message) {
+      alert('Failed because: ' + message);
+}
+
 function onAddPhoto(imageURI) {
 alert("AddPhoto");  
     
@@ -86,9 +90,8 @@ for(var i = 0; i < Information.length;i++){
     
 
 
-function onFail(message) {
-      alert('Failed because: ' + message);
-}
+
+    
 
 
 function error(err){
@@ -97,7 +100,7 @@ function error(err){
     
 
 
-//Add photo to backendless table
+
   
 
 
