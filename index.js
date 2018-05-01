@@ -28,7 +28,7 @@ function onPhotoDataSuccess(imageURI) {
 	var image = document.getElementById('myImage');
 	image.style.display = 'block';
 	image.src = imageURI ;
-   localStorage.setItem("imageURI"+imageURI)
+   localStorage.setItem("imageURI",imageURI)
     onAddPhoto(imageURI);
 	
 	var textEntry = prompt("Message");
