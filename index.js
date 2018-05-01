@@ -48,7 +48,7 @@ alert("AddPhoto");
     
 var imageData = (localStorage.imageURI);
 
-
+alert("Variable saved" + imageData); 
  
  //Array of variables
 
@@ -57,17 +57,21 @@ var infromation = {
 	
 };
     
+alert("Array created" + imageData); 
+    
 //save array to backendless
  Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
 	
 
 
-
+alert("URI saved"); 
 
     
  Backendless.Data.of("Information").find().then(processResults).catch(error);
+    
+    
 function processResults(Information) {
-	
+alert("processResults"); 
 //Empty the content 
 $("#images").empty();
 
@@ -77,7 +81,7 @@ for(var i = 0; i < Information.length;i++){
     $("#images").append("<img src=" + Information[i].fileLocation+">");
 }
 	
- 
+ alert("Processed"); 
 
 	
 	
