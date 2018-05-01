@@ -69,6 +69,13 @@ alert("URI saved");
     
  Backendless.Data.of("Information").find().then(processResults).catch(error);
     
+ alert("Data processed");   
+    
+    
+    
+  function error(err){
+     alert(err); 
+ }  
     
 function processResults(Information) {
 alert("processResults"); 
@@ -92,25 +99,6 @@ for(var i = 0; i < Information.length;i++){
 }   
     
     
-    
-    
-
-
-
-    
-
-
-function error(err){
-     alert(err); 
- }
-    
-
-
-
-  
-
-
-
 
 
     
