@@ -63,6 +63,11 @@ function gotFile(fileObject){
  .then( function( savedFileURL ) {
     console.log( "file has been saved - " + savedFileURL );
 Backendless.Data.of("Information").save(savedFileURL).then(saved).catch(error);
+    function saved(savedImage) {
+console.log( "new image has been saved" + savedImage);  
+}
+            
+                
   }
       )
  .catch( function( error ) {
@@ -81,9 +86,6 @@ Backendless.Data.of("Information").save(savedFileURL).then(saved).catch(error);
 
 
 
-function saved(savedImage) {
-console.log( "new image has been saved" + savedImage);  
-}
 
 
 
