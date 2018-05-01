@@ -62,6 +62,11 @@ alert("Array created" + imageData);
 //save array to backendless
  Backendless.Data.of("Information").save(information).then(saved).catch(error);
 	
+function saved(savedImage) {
+console.log( "new image has been saved" + savedImage);  
+}
+    
+    
 function error(err){
      alert(err); 
  }  
