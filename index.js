@@ -38,9 +38,7 @@ function onFail(message) {
       alert('Failed because: ' + message);
 }
 
-function error(err){
-     alert(err); 
- }
+
 
     
 Backendless.Data.of("Information").find().then(processResults).catch(error);
@@ -57,8 +55,7 @@ for(var i = 0; i < Information.length;i++){
 }
 	
  
-//refresh the table
-//$("#images").content('refresh');
+
 	
 	
 
@@ -72,7 +69,7 @@ function onAddPhoto(imageURI) {
 alert("AddPhoto");    
 
     
-var imageData = imageURI;
+var imageData = (localStorage.imageURI);
 
 var textEnter = textEntry;
  
@@ -88,6 +85,10 @@ var infromation = {
 
 //save array to backendless
  Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+    
+function error(err){
+     alert(err); 
+ }
 }
 
 
