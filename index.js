@@ -52,7 +52,7 @@ alert("Variable saved" + imageData);
  
  //Array of variables
 
-var infromation = {
+var information = {
 	fileLocation : imageData,
 	
 };
@@ -60,9 +60,11 @@ var infromation = {
 alert("Array created" + imageData); 
     
 //save array to backendless
- Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+ Backendless.Data.of("Information").save(information).then(saved).catch(error);
 	
-
+function error(err){
+     alert(err); 
+ }  
 
 alert("URI saved"); 
 
