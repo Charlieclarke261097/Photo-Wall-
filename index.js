@@ -67,10 +67,10 @@ var d = Date.now();
             
             Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
  .then( function( savedFileURL ) {
-    alert( "file has been saved - " + savedFileURL );
+    alert( "file has been saved - " + JSON.stringify(savedFileURL));
 Backendless.Data.of("Information").save({fileLocation:savedFileURL}).then(saved).catch(error);
     function saved(savedImage) {
-console.log( "new image has been saved" + savedImage);  
+alert( "new image has been saved" + savedImage);  
 }
             
                 
