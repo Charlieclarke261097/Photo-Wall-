@@ -95,6 +95,8 @@ for(var i = 0; i < Information.length;i++){
     $("#images").append("<img src=" + Information[i].fileLocation+">");
 }
 	
+    
+alert( Information[i].fileLocation)
  alert("Processed"); 
 
 	
