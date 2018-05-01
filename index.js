@@ -47,14 +47,13 @@ function gotFile(fileObject){
     
     alert("File Uploaded " + fileObject.type);
     
-	 console.log("File Uploaded " + fileObject.size);
+	 alert("File Uploaded " + fileObject.size);
 	
     alert("File Uploaded " + fileObject.name);
     
-var d = Date.now(); // for now
-d.getHours(); // => 9
-d.getMinutes(); // =>  30
-d.getSeconds(); // => 51
+var d = Date.now();
+    
+    
     var filename = d+".jpeg";
     alert(filename);
     
