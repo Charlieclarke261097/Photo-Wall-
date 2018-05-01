@@ -51,10 +51,12 @@ function gotFile(fileObject){
 	
     console.log("File Uploaded " + fileObject.name);
     
-var d = new Date(); // for now
+var d = Date.now(); // for now
 d.getHours(); // => 9
 d.getMinutes(); // =>  30
 d.getSeconds(); // => 51
+    var filename = d+".jpeg";
+    alert(filename);
     
     var reader = new FileReader();
 
@@ -64,7 +66,7 @@ d.getSeconds(); // => 51
             
             var byteArray = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
             
-            Backendless.Files.saveFile( "testfolder", d , byteArray, true )
+            Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
  .then( function( savedFileURL ) {
     alert( "file has been saved - " + savedFileURL );
 Backendless.Data.of("Information").save({fileLocation:savedFileURL}).then(saved).catch(error);
