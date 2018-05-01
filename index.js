@@ -86,7 +86,7 @@ alert( "new image has been saved" + savedImage);
     
     
     alert("end fucntion");
-
+processResults(Information);
 }
     
 
