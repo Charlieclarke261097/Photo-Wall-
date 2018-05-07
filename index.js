@@ -20,7 +20,7 @@ function onDeviceReady() {
 
 //When phot is captured trigger function onPhotoDataSuccess and set destination type of the file to URI
 function capturePhoto() {
-	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {quality:50,targetWidth:100,targetHeight:100,
     destinationType: window.Camera.DestinationType.FILE_URI
 });
 }
