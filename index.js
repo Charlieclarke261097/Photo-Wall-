@@ -14,10 +14,17 @@ document.addEventListener("deviceready",onDeviceReady,false);
 // When device is ready navigate to camera
 function onDeviceReady() {
 	destinationType=navigator.camera.DestinationType;
+	
+	Backendless.Data.of( "Information" ).find()
+                                        .then( function( result ) {
+                                            processResults(result);
+                                        
+                                        })
+                                        .catch( function( error ) {
+                                        });
+        
     
-for(var i = 0; i < Information.length;i++){
-    $("#images").append("<img src=" + Information[i].fileLocation+">");
-}
+
 }
 
 //When phot is captured trigger function onPhotoDataSuccess and set destination type of the file to URI
@@ -43,24 +50,16 @@ function gotFileEntry(fileEntry){
 }
     
 function gotFile(fileObject){
-    alert("gotFile " + fileObject);
     
-       alert("File Uploaded " + fileObject.fullPath);
-    
-    alert("File Uploaded " + fileObject.type);
-    
-	 alert("File Uploaded " + fileObject.size);
-	
-    alert("File Uploaded " + fileObject.name);
    //Take current date of photo taken 
 var d = Date.now();
-    alert("date taken" + d);
+    
 	
     // Change the file name to the current date with file type
 	
     var filename = d+".jpeg";
 	
-    alert(filename);
+    
 	
     //Read file
     var reader = new FileReader();
@@ -76,12 +75,12 @@ var d = Date.now();
             Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
                 .then( 
                     function( savedFileURL ) {
-                        alert( "file has been saved - " + savedFileURL.fileURL);
+                  
                         Backendless.Data.of("Information").save({fileLocation:savedFileURL.fileURL})
                             .then(saved).catch(error);
                                 function saved(savedImage) {
         
-                                    alert( "new image has been saved" + savedImage);  
+                                    alert( "Your image has been added to the wall!");  
                                     //Process the results in the information table 
                                     Backendless.Data.of( "Information" ).find()
                                         .then( function( result ) {
@@ -105,7 +104,7 @@ var d = Date.now();
     
     
     
-    alert("end fucntion");
+    
 
 }
     
@@ -116,7 +115,7 @@ var d = Date.now();
 
 
 function processResults(Information) {
-alert("processResults"); 
+ 
 //Empty the content 
 $("#images").empty();
 
@@ -127,9 +126,6 @@ for(var i = 0; i < Information.length;i++){
 }
 	
     
-alert( Information[i].fileLocation)
- 
-alert("Processed"); 
 
 	
 	
