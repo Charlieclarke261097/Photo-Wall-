@@ -65,16 +65,12 @@ height: 50px;
 width : 250px;
 }
 
-#myImage{
-    
-width: 100px;
-height: 100px;
-}
+
 
 #images{
     
-width: 200px;
-height: 200px;
+width: 50%;
+height: auto;
 }
 
 #backButton{
