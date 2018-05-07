@@ -1,6 +1,6 @@
 
 
-
+//Backendless keys for access to data tables and app
 var APPID = "3F4DF6B3-BD68-2097-FFF1-1E29A6C5EC00";
 var SECRETKEY = "89A5E954-BFC0-5152-FF19-99AB46D7CB00";
 
@@ -11,12 +11,14 @@ var destinationType; //used sets what should be returned (image date OR file pat
 
 document.addEventListener("deviceready",onDeviceReady,false);
 
+// When device is ready navigate to camera
 function onDeviceReady() {
 	destinationType=navigator.camera.DestinationType;
     
 
 }
 
+//When phot is captured trigger function onPhotoDataSuccess and set destination type of the file to URI
 function capturePhoto() {
 	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
     destinationType: window.Camera.DestinationType.FILE_URI
@@ -24,17 +26,15 @@ function capturePhoto() {
 }
 	
 function onPhotoDataSuccess(imageURI) {
-	//var image = document.getElementById('image');
-	//image.style.display = 'block';
-	//image.src = imageURI;
+	
     
-    //save file to backendless
+    //Find the local files URL
 
     window.resolveLocalFileSystemURL(imageURI,gotFileEntry,onFail);
      
 }
 
-
+//File has been recieved
 function gotFileEntry(fileEntry){
     console.log("gotFileEntry " + fileEntry);
     fileEntry.file(gotFile,onFail);
@@ -50,21 +50,27 @@ function gotFile(fileObject){
 	 alert("File Uploaded " + fileObject.size);
 	
     alert("File Uploaded " + fileObject.name);
-    
+   //Take current date of photo taken 
 var d = Date.now();
     alert("date taken" + d);
-    
+	
+    // Change the file name to the current date with file type
+	
     var filename = d+".jpeg";
+	
     alert(filename);
-    
+	
+    //Read file
     var reader = new FileReader();
 
         reader.onloadend = function() {
             console.log("Successful file read: " + this.result);
             console.log("File Uploaded " + fileObject.fullPath);
             
+			//Save the file as a blob of type image/jpg
             var byteArray = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
-            
+            //Save file to backendless folder 
+			//Save the files URL to the information table in backendless
             Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
                 .then( 
                     function( savedFileURL ) {
@@ -74,7 +80,7 @@ var d = Date.now();
                                 function saved(savedImage) {
         
                                     alert( "new image has been saved" + savedImage);  
-                                    
+                                    //Process the results in the information table 
                                     Backendless.Data.of( "Information" ).find()
                                         .then( function( result ) {
                                             processResults(result);
@@ -131,7 +137,7 @@ alert("Processed");
 
 }
 
-
+//Fail message if file can not be got 
 function onFail(message) {
       console.log('Failed because: ' + message);
 }
