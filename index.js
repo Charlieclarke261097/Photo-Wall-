@@ -15,7 +15,9 @@ document.addEventListener("deviceready",onDeviceReady,false);
 function onDeviceReady() {
 	destinationType=navigator.camera.DestinationType;
     
-
+for(var i = 0; i < Information.length;i++){
+    $("#images").append("<img src=" + Information[i].fileLocation+">");
+}
 }
 
 //When phot is captured trigger function onPhotoDataSuccess and set destination type of the file to URI
