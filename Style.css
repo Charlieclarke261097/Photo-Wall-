@@ -67,14 +67,14 @@ width : 250px;
 
 #myImage{
     
-width: 50%;
+width: 100px;
 height: 100px;
 }
 
 #images{
     
-width: 50%;
-height: auto;
+width: 100px;
+height: 100px;
 }
 
 #backButton{
