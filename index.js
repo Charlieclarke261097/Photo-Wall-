@@ -96,7 +96,7 @@ var d = Date.now();
                                         }
       )
  .catch( function( error ) {
-    alert( "error - " + error.message );
+    console.log( "error - " + error.message );
   }); 
         };
 
