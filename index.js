@@ -1,11 +1,11 @@
-//Backendless table API key reference
-Backendless.initApp("3F4DF6B3-BD68-2097-FFF1-1E29A6C5EC00","89A5E954-BFC0-5152-FF19-99AB46D7CB00");
 
-//Check that the page has loaded
-$(document).on("pageshow","#page2", onPageShow);
-function onPageShow() {
-console.log("page shown");
-}
+
+
+var APPID = "3F4DF6B3-BD68-2097-FFF1-1E29A6C5EC00";
+var SECRETKEY = "89A5E954-BFC0-5152-FF19-99AB46D7CB00";
+
+Backendless.initApp( APPID, SECRETKEY);
+
 
 var destinationType; //used sets what should be returned (image date OR file path to image for example)
 
@@ -13,85 +13,128 @@ document.addEventListener("deviceready",onDeviceReady,false);
 
 function onDeviceReady() {
 	destinationType=navigator.camera.DestinationType;
+    
+
 }
 
 function capturePhoto() {
-    alert("capturePhoto");
-	navigator.camera.getPicture(onPhotoDataSuccess, onFail, { quality: 50,
-	destinationType: destinationType.FILE_URI });
+	navigator.camera.getPicture(onPhotoDataSuccess, onFail, {
+    destinationType: window.Camera.DestinationType.FILE_URI
+});
 }
 	
 function onPhotoDataSuccess(imageURI) {
-     alert("onPhoto" + imageURI);
+	//var image = document.getElementById('image');
+	//image.style.display = 'block';
+	//image.src = imageURI;
     
+    //save file to backendless
+
+    window.resolveLocalFileSystemURL(imageURI,gotFileEntry,onFail);
+     
+}
+
+
+function gotFileEntry(fileEntry){
+    console.log("gotFileEntry " + fileEntry);
+    fileEntry.file(gotFile,onFail);
+}
     
-	var image = document.getElementById('myImage');
-	image.style.display = 'block';
-	image.src = imageURI ;
-   localStorage.setItem("imageURI"+imageURI)
-    onAddPhoto(imageURI);
+function gotFile(fileObject){
+    alert("gotFile " + fileObject);
+    
+       alert("File Uploaded " + fileObject.fullPath);
+    
+    alert("File Uploaded " + fileObject.type);
+    
+	 alert("File Uploaded " + fileObject.size);
 	
-	var textEntry = prompt("Message");
-}
-
-function onFail(message) {
-      alert('Failed because: ' + message);
-}
-
-function error(err){
-     alert(err); 
- }
-
+    alert("File Uploaded " + fileObject.name);
     
-Backendless.Data.of("Information").find().then(processResults).catch(error);
+var d = Date.now();
+    alert("date taken" + d);
+    
+    var filename = d+".jpeg";
+    alert(filename);
+    
+    var reader = new FileReader();
+
+        reader.onloadend = function() {
+            console.log("Successful file read: " + this.result);
+            console.log("File Uploaded " + fileObject.fullPath);
+            
+            var byteArray = new Blob([new Uint8Array(this.result)], { type: "image/jpg" });
+            
+            Backendless.Files.saveFile( "testfolder", filename, byteArray, true )
+                .then( 
+                    function( savedFileURL ) {
+                        alert( "file has been saved - " + savedFileURL.fileURL);
+                        Backendless.Data.of("Information").save({fileLocation:savedFileURL.fileURL})
+                            .then(saved).catch(error);
+                                function saved(savedImage) {
+        
+                                    alert( "new image has been saved" + savedImage);  
+                                    
+                                    Backendless.Data.of( "Information" ).find()
+                                        .then( function( result ) {
+                                            processResults(result);
+                                        
+                                        })
+                                        .catch( function( error ) {
+                                        });
+        
+                                        }
+            
+                
+                                        }
+      )
+ .catch( function( error ) {
+    alert( "error - " + error.message );
+  }); 
+        };
+
+        reader.readAsArrayBuffer(fileObject);
+    
+    
+    
+    alert("end fucntion");
+
+}
+    
+
+
+
+
+
+
 function processResults(Information) {
-	
+alert("processResults"); 
 //Empty the content 
 $("#images").empty();
 
 //add each photo and text 
     
 for(var i = 0; i < Information.length;i++){
-	var message = Information[i].Text;
-    $("#images").append("a href=" + Information[i].fileLocation + message);
+    $("#images").append("<img src=" + Information[i].fileLocation+">");
 }
 	
- 
-//refresh the table
-//$("#images").content('refresh');
-	
-	
-
-
-
-
-}
-
-//Add photo to backendless table
-function onAddPhoto(imageURI) {
-alert("AddPhoto");    
-
     
-var imageData = imageURI;
-
-var textEnter = textEntry;
+alert( Information[i].fileLocation)
  
- //Array of variables
+alert("Processed"); 
 
-var infromation = {
-	fileLocation : imageData,
-	Text : textEntry
 	
-};
+	
 
 
 
-//save array to backendless
- Backendless.Data.of("Information").save(infromation).then(saved).catch(error);
+
 }
 
 
-
+function onFail(message) {
+      console.log('Failed because: ' + message);
+}
 
  
  
